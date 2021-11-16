@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
 import "./bodycomponent.css"
 class Bodycomponent extends Component {
+    constructor(props){
+        super(props);
+            this.state = {
+                history:"",
+                operand1:"",
+                operator:"",
+                operand2:"",
+                upperdisplay:"",
+                lowerdisplay:""
+            }
+        
+    }
     render() {
         return (
             <>
