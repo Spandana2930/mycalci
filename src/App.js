@@ -4,7 +4,7 @@ import FooterComponent from "./components/FooterComponent/footercomponent";
 import AboutPage from "./components/FooterComponent/Aboutpage/aboutpage";
 import { BrowserRouter as Router,Switch,Route } from 'react-router-dom';
 import BodyComponent from "./components/BodyComponent/bodycomponent"
-// import HeaderComponent from "./components/"
+//import HeaderComponent from "./components/HeaderComponent/headercomponent"
 function App() {
   return (
     <>
