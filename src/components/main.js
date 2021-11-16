@@ -9,6 +9,7 @@ import FooterComponent from "./FooterComponent/footercomponent";
  * 
  * @params Creating function Main 
  * returning the components
+ * exporting the Main()
  */
 function Main(){
     return(

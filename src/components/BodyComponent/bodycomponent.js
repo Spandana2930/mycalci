@@ -1,6 +1,13 @@
+/**
+ * Importing all the local components
+ */
 import React, { Component } from 'react';
 import "./bodycomponent.css"
 import Button from '../reuseablecomponents/button'
+
+/**
+ * creating Class Component as BodyComponent
+ */
 
 class Bodycomponent extends Component {
     
