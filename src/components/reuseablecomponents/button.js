@@ -1,3 +1,7 @@
+/**
+ * Importing the React component from react
+ * creating the button and exporting it
+ */
 import React from 'react';
 
 const Button = (props) => {

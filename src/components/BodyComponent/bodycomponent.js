@@ -1,12 +1,20 @@
-import React, { Component } from "react";
-import "./bodycomponent.css";
-import Button from "../reuseablecomponents/button";
+/**
+ * Importing all the local components
+ */
+import React, { Component } from 'react';
+import "./bodycomponent.css"
+import Button from '../reuseablecomponents/button'
 
+/**
+ * creating Class Component as BodyComponent
+ * created states when = buttton is clicked operations are performed  
+ 
+ */
 class Bodycomponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      history: "",
+      history: [],
       operand: "",
       sumofoperation: "",
       operator: "",
@@ -14,21 +22,10 @@ class Bodycomponent extends Component {
       lowerdisplay: "",
     };
   }
-  calculate = () => {
-    try {
-      this.setState({
-        // eslint-disable-next-line
-        lowerdisplay: (eval(this.state.lowerdisplay) || "") + "",
-      });
-    } catch (e) {
-      this.setState({
-        lowerdisplay: "error",
-      });
-    }
-  };
+ 
   clear = () => {
     this.setState({
-      history: "",
+      
       operand: "",
       operator: "",
       upperdisplay: "",
@@ -42,11 +39,21 @@ class Bodycomponent extends Component {
       upperdisplay: this.state.upperdisplay.slice(0, -1),
     });
   };
+  /**
+   * 
+   * @param {*} event 
+   * @description any button clicked this add function gets called 
+   * all the operations are performed in this function 
+   * stored upperdisplay state in history 
+   */
   add = (event) => {
     let value = event.target.value;
     if (value == "=") {
-      let splittedValue = this.state.upperdisplay.split(this.state.operator);
-      let length = splittedValue.length;
+        let splittedValue = this.state.upperdisplay.split(this.state.operator);
+        let array = [...this.state.history]
+        array.push(this.state.upperdisplay)
+        console.log(this.state)
+        this.setState({history:array})
      
       if (this.state.operator == "+") {
         let totalplus = 0;
