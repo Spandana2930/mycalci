@@ -4,25 +4,19 @@ import FooterComponent from "./components/FooterComponent/footercomponent";
 import AboutPage from "./components/FooterComponent/Aboutpage/aboutpage";
 import { BrowserRouter as Router,Switch,Route } from 'react-router-dom';
 import BodyComponent from "./components/BodyComponent/bodycomponent"
-// import HeaderComponent from "./components/"
+import HeaderComponent from "./components/HeaderComponent/headercomponent"
+import Main from "./components/main"
 function App() {
   return (
     <>
     <Router>
             <Switch>
-            {/* <Route
-                    exact path="/"
-                    render={()=><HeaderComponent/>}
-                /> */}
-                
             <Route
                     exact path="/"
-                    render={()=><BodyComponent/>}
+                    render={()=><Main/>}
                 />
-                <Route
-                    exact path="/"
-                    render={()=><FooterComponent/>}
-                />
+                
+           
                
                 <Route
                     exact path="/about"
