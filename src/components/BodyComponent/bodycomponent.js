@@ -6,13 +6,14 @@ class Bodycomponent extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			
 
 		}
 	}
 	render() {
 		let arr = ["c", "del", "%", "+", 1, 2, 3, "-", 4, 5, 6, "*", 7, 8, 9, "/", 0, "00", ".", "="]
 		const clear=()=>{
-			
+
 		}
 		const add = (event) => {
 			let value=event.target.value

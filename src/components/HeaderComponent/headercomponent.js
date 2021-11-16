@@ -4,7 +4,7 @@ const Headercomponent =()=>  {
 
         return (
             <>
-            <div class = "container d-flex flex-row align-items-center">
+            <div class = "container d-flex flex-column align-items-center">
            <h1>Calculator</h1>
            </div>
            </>
