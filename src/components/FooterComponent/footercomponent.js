@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import {Link} from 'react-router-dom'
 
 /**
  * 
@@ -12,7 +13,9 @@ import React from 'react';
 export default function Footercomponent() {
     return (
         <div>
+            <Link to = "/about">
             <button>Click here to view About Page.</button>
+            </Link>
         </div>
     )
 }
