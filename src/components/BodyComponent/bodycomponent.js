@@ -1,46 +1,40 @@
 import React, { Component } from 'react';
 import "./bodycomponent.css"
+import Button from '../reuseablecomponents/button'
+
 class Bodycomponent extends Component {
-    render() {
-        return (
-            <>
-            <div class="calculator">
- <div class="input" id="input"></div>
- <div class="buttons">
-   <div class="operators">
-     <div>+</div>
-     <div>-</div>
-     <div>&times;</div>
-     <div>&divide;</div>
-   </div>
-   <div class="leftPanel">
-     <div class="numbers">
-       <div>7</div>
-       <div>8</div>
-       <div>9</div>
-     </div>
-     <div class="numbers">
-       <div>4</div>
-       <div>5</div>
-       <div>6</div>
-     </div>
-     <div class="numbers">
-       <div>1</div>
-       <div>2</div>
-       <div>3</div>
-     </div>
-     <div class="numbers">
-       <div>0</div>
-       <div>.</div>
-       <div id="clear">C</div>
-     </div>
-   </div>
-   <div class="equal" id="result">=</div>
- </div>
-</div>
-           </>
-        );
-    }
+	constructor(props) {
+		super(props)
+		this.state = {
+
+		}
+	}
+	render() {
+		let arr = ["c", "del", "%", "+", 1, 2, 3, "-", 4, 5, 6, "*", 7, 8, 9, "/", 0, "00", ".", "="]
+		const add = () => {
+
+		}
+
+		return (
+			<>
+				<div className="card shadow d-flex flex-column m-3">
+					<h5 className="align-self-start p-2">2*2</h5>
+					<h2 className="align-self-end p-2">4</h2>
+				</div>
+				<div className="container">
+					<div className="row shadow p-2">
+						{arr.map((value) => {
+							return (
+								<div className="col-3">
+									<Button className="btn btn-grey col-12 mt-2" value={value} onClick={(event) => this.add(event)} btnText={value} />
+								</div>
+							)
+						})}
+					</div>
+				</div>
+			</>
+		);
+	}
 }
 
 export default Bodycomponent;
