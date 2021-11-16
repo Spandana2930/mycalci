@@ -11,8 +11,15 @@ class Bodycomponent extends Component {
 	}
 	render() {
 		let arr = ["c", "del", "%", "+", 1, 2, 3, "-", 4, 5, 6, "*", 7, 8, 9, "/", 0, "00", ".", "="]
-		const add = () => {
-
+		const clear=()=>{
+			
+		}
+		const add = (event) => {
+			let value=event.target.value
+			console.log(value)
+			if(value==="c"){
+				this.clear()
+			}
 		}
 
 		return (

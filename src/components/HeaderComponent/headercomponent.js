@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-class Headercomponent extends Component {
-    render() {
+const Headercomponent =()=>  {
+
         return (
             <>
             <div class = "container d-flex flex-row align-items-center">
@@ -10,6 +10,6 @@ class Headercomponent extends Component {
            </>
         );
     }
-}
+
 
 export default Headercomponent;
