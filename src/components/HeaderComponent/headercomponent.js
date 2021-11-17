@@ -10,21 +10,21 @@ import {connect} from 'react-redux'
  * exporting the default Headercomponent
  */
  const mapStateToProps =(state)=>({
-    lowerdisplay:state
+    history:state.reduxState?.state?.history
   
     
   })
-const Headercomponent =()=>  {
+const Headercomponent =(props)=>  {
 
         return (
             <>
             <div class = "container d-flex flex-column align-items-center">
            <h1>Calculator</h1>
-           <p>No.of calculations:</p>
+           <p>No.of calculations:{props.history?.length}</p>
            </div>
            </>
         );
     }
 
 
-export default Headercomponent;
+export default connect(mapStateToProps)(Headercomponent);
