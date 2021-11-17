@@ -1,9 +1,10 @@
 /**
  * Importing all the local components
  */
-import React, { Component } from 'react';
-import "./bodycomponent.css"
-import Button from '../reuseablecomponents/button'
+import React, { Component } from "react";
+import "./bodycomponent.css";
+import Button from "../reuseablecomponents/button";
+
 
 /**
  * creating Class Component as BodyComponent
@@ -20,12 +21,12 @@ class Bodycomponent extends Component {
       operator: "",
       upperdisplay: "",
       lowerdisplay: "",
+      exceeded:""
     };
   }
- 
+
   clear = () => {
     this.setState({
-      
       operand: "",
       operator: "",
       upperdisplay: "",
@@ -39,72 +40,46 @@ class Bodycomponent extends Component {
       upperdisplay: this.state.upperdisplay.slice(0, -1),
     });
   };
+  lowerdisplay = (splittedNumber) => {
+    if (this.state.operator == "+") {
+      let num = splittedNumber.reduce((a, b) => a + b);
+      this.setState({ lowerdisplay: num });
+    }
+    if (this.state.operator == "-") {
+      let num = splittedNumber.reduce((a, b) => a - b);
+      this.setState({ lowerdisplay: num });
+    }
+    if (this.state.operator == "*") {
+      let num = splittedNumber.reduce((a, b) => a * b);
+      this.setState({ lowerdisplay: num });
+    }
+    if (this.state.operator == "/") {
+      let num = splittedNumber.reduce((a, b) => a / b);
+      this.setState({ lowerdisplay: num });
+    }
+    if (this.state.operator == "%") {
+      let num = splittedNumber.reduce((a, b) => a % b);
+      this.setState({ lowerdisplay: num });
+    }
+  };
   /**
-   * 
-   * @param {*} event 
-   * @description any button clicked this add function gets called 
-   * all the operations are performed in this function 
-   * stored upperdisplay state in history 
+   *
+   * @param {*} event
+   * @description any button clicked this add function gets called
+   * all the operations are performed in this function
+   * stored upperdisplay state in history
    */
   add = (event) => {
     let value = event.target.value;
     if (value == "=") {
-        let splittedValue = this.state.upperdisplay.split(this.state.operator);
-        let array = [...this.state.history]
-        array.push(this.state.upperdisplay)
-        console.log(this.state)
-        this.setState({history:array})
-     
-      if (this.state.operator == "+") {
-        let totalplus = 0;
-        splittedValue.map((a) => {
-          if (Number(a)) {
-            let num = Number(a);
-            totalplus += num;
-          }
-          this.setState({ lowerdisplay: totalplus });
-        });
-      }
-      if (this.state.operator == "-") {
-        let totalminus = 0
-        splittedValue.map((a) => {
-          if (Number(a)) {
-            let num = Number(a);
-            totalminus -= num 
-          }
-          this.setState({ lowerdisplay: totalminus });
-        });
-      }
-      if (this.state.operator == "*") {
-        let totalmul = 1;
-        splittedValue.map((a) => {
-          if (Number(a)) {
-            let num = Number(a);
-            totalmul *= num;
-          }
-          this.setState({ lowerdisplay: totalmul });
-        });
-      }
-      if (this.state.operator == "%") {
-        let totaldiv = 1;
-        splittedValue.map((a) => {
-          if (Number(a)) {
-            let num = Number(a);
-            totaldiv %= num;
-          }
-          this.setState({ lowerdisplay: totaldiv });
-        });
-      }
-      if (this.state.operator == "/") {
-        let totaldiv = 1;
-        splittedValue.map((a) => {
-          if (Number(a)) {
-            let num = Number(a);
-            totaldiv /= num;
-          }
-          this.setState({ lowerdisplay: totaldiv });
-        });
-      }
+      let splittedValue = this.state.upperdisplay.split(this.state.operator);
+      const splittedNumber = splittedValue.map(Number);
+      console.log(splittedNumber);
+      this.lowerdisplay(splittedNumber);
+      let array = [...this.state.history];
+      array.push(this.state.upperdisplay);
+
+      this.setState({ history: array });
     }
     if (value == "+") {
       this.setState({
@@ -153,9 +128,13 @@ class Bodycomponent extends Component {
       value == "-" ||
       value == "*" ||
       value == "%" ||
-      value == "/"
+      value == "/" ||
+      value == "0"
     ) {
       this.setState({ upperdisplay: this.state.upperdisplay + value });
+      if(this.state.upperdisplay.length>10){
+        this.setState({exceeded:"Limit exceeded"})
+      }
     }
   };
   render() {
@@ -189,24 +168,24 @@ class Bodycomponent extends Component {
           <h2 className="align-self-end p-2">{this.state.lowerdisplay}</h2>
         </div>
         <div className="container">
-          <div className="row shadow p-2">
+          <div className="row  p-2">
             {arr.map((value) => {
               return (
-                <div className="col-3">
+                <div className="col-3 shadow bg-grey" style = {{backgroundSize:"cover"}}>
                   <Button
-                    className="btn btn-grey col-12 mt-2"
+                    className="btn btn-primary col-12 mt-2"
                     value={value}
-                    handleClick={(event) => this.add(event)}
+                    handleClick={(event) => this.state.exceeded?"": this.add(event)}
                     btnText={value}
                   />
                 </div>
               );
             })}
+            <p>{this.state.exceeded}</p>
           </div>
         </div>
       </>
     );
   }
 }
-
 export default Bodycomponent;

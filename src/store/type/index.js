@@ -1,0 +1,1 @@
+export const UPPER_DISPLAY = "UPPER_DISPLAY"
