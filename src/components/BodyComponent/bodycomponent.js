@@ -4,8 +4,18 @@
 import React, { Component } from "react";
 import "./bodycomponent.css";
 import Button from "../reuseablecomponents/button";
+import {connect} from 'react-redux'
 
+import {getAllStates} from "../../store/actions/index"
 
+const mapDispatchToProps = ()=>({
+  getAllStates
+})
+const mapStateToProps =(state)=>({
+  lowerdisplay:state
+
+  
+})
 /**
  * creating Class Component as BodyComponent
  * created states when = buttton is clicked operations are performed  
@@ -17,11 +27,11 @@ class Bodycomponent extends Component {
     this.state = {
       history: [],
       operand: "",
-      sumofoperation: "",
-      operator: "",
       upperdisplay: "",
       lowerdisplay: "",
-      exceeded:""
+      exceeded:"",
+      operator:""
+      
     };
   }
 
@@ -40,10 +50,11 @@ class Bodycomponent extends Component {
       upperdisplay: this.state.upperdisplay.slice(0, -1),
     });
   };
-  lowerdisplay = (splittedNumber) => {
+  lowerDisplay = (splittedNumber) => {
     if (this.state.operator == "+") {
       let num = splittedNumber.reduce((a, b) => a + b);
       this.setState({ lowerdisplay: num });
+       
     }
     if (this.state.operator == "-") {
       let num = splittedNumber.reduce((a, b) => a - b);
@@ -72,14 +83,19 @@ class Bodycomponent extends Component {
   add = (event) => {
     let value = event.target.value;
     if (value == "=") {
+      // this.props.count(this.setState) 
       let splittedValue = this.state.upperdisplay.split(this.state.operator);
       const splittedNumber = splittedValue.map(Number);
-      console.log(splittedNumber);
-      this.lowerdisplay(splittedNumber);
+      this.lowerDisplay(splittedNumber);
       let array = [...this.state.history];
       array.push(this.state.upperdisplay);
 
+
       this.setState({ history: array });
+      setTimeout(() =>{
+        this.props.getAllStates(this.state) 
+      },1000)
+      
     }
     if (value == "+") {
       this.setState({
@@ -129,9 +145,11 @@ class Bodycomponent extends Component {
       value == "*" ||
       value == "%" ||
       value == "/" ||
-      value == "0"
+      value == "0"  ||
+      value == "."
     ) {
       this.setState({ upperdisplay: this.state.upperdisplay + value });
+      
       if(this.state.upperdisplay.length>10){
         this.setState({exceeded:"Limit exceeded"})
       }
@@ -188,4 +206,4 @@ class Bodycomponent extends Component {
     );
   }
 }
-export default Bodycomponent;
+export default connect (mapStateToProps,mapDispatchToProps()) (Bodycomponent)

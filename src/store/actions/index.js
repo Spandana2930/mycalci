@@ -1,17 +1,13 @@
-// import {UPPER_DISPLAY} from "../type/index"
-//  const upperDisplayData = (data)=>{
-//      return{
-//         type:UPPER_DISPLAY,
+import {ALL_STATES} from "../type/index"
+// export  const upperDisplayData = (data)=>({
+//     type:UPPER_DISPLAY,
 //         payload:data
-//      }
-  
-// }
-// const lowerDisplayData = (data)=>{
-//     return{
-//         type:LOWER_DISPLAY,
+// })
+// export  const lowerDisplayData = (data)=>({
+//     type:LOWER_DISPLAY,
 //         payload:data
-//     }
-// }
-// export default{
-//     upperDisplayData, lowerDisplayData
-// };
+// })
+export const getAllStates = (data)=>({
+    type:ALL_STATES,
+    payload:data
+})

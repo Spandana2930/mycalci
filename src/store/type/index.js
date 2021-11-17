@@ -1,1 +1,2 @@
-export const UPPER_DISPLAY = "UPPER_DISPLAY"
+export const ALL_STATES = "ALL_STATES"
+

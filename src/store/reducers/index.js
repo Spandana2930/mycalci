@@ -1,17 +1,18 @@
-import UPPER_DISPLAY from "../type/index"
+import {ALL_STATES} from "../type/index"
 const initialState ={
-    upperDisplayData:[]
+    
 }
 const  reducer=(state = initialState,action)=>{
     switch(action.type){
-        case UPPER_DISPLAY:
+        case ALL_STATES:
             return{
-                upperDisplayData: action.payload 
+                state:action.payload
+               
             }
-            default:
-                return state
             
 
+            default:
+                return state
     }
 }
 export default reducer;
