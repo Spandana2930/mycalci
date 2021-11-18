@@ -4,18 +4,24 @@
 import React, { Component } from "react";
 import "./bodycomponent.css";
 import Button from "../reuseablecomponents/button";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 
-import {getAllStates} from "../../store/actions/index"
-
-const mapDispatchToProps = ()=>({
-  getAllStates
-})
-const mapStateToProps =(state)=>({
-  lowerdisplay:state
-
-  
-})
+import { getAllStates } from "../../store/actions/index";
+/**
+ * 
+ * @returns default function is used to update redux state
+ */
+const mapDispatchToProps = () => ({
+  getAllStates,
+});
+/**
+ * 
+ * @param {*} state 
+ * mapStateToProps is used to get data from redux state
+ */
+const mapStateToProps = (state) => ({
+  lowerdisplay: state,
+});
 /**
  * creating Class Component as BodyComponent
  * created states when = buttton is clicked operations are performed  
@@ -29,9 +35,8 @@ class Bodycomponent extends Component {
       operand: "",
       upperdisplay: "",
       lowerdisplay: "",
-      exceeded:"",
-      operator:""
-      
+      exceeded: "",
+      operator: "",
     };
   }
 
@@ -42,6 +47,7 @@ class Bodycomponent extends Component {
       upperdisplay: "",
       lowerdisplay: "",
       deleteoperand: "",
+
     });
   };
   backspace = () => {
@@ -51,24 +57,25 @@ class Bodycomponent extends Component {
     });
   };
   lowerDisplay = (splittedNumber) => {
-    if (this.state.operator == "+") {
-      let num = splittedNumber.reduce((a, b) => a + b);
-      this.setState({ lowerdisplay: num });
-       
+    let res 
+    if (this.state.operator === "+") {
+      res = splittedNumber[0]+splittedNumber[1];
+      // let num = splittedNumber.reduce((a, b) => a + b);
+      this.setState({ lowerdisplay: res });
     }
-    if (this.state.operator == "-") {
+    if (this.state.operator === "-") {
       let num = splittedNumber.reduce((a, b) => a - b);
       this.setState({ lowerdisplay: num });
     }
-    if (this.state.operator == "*") {
+    if (this.state.operator === "*") {
       let num = splittedNumber.reduce((a, b) => a * b);
       this.setState({ lowerdisplay: num });
     }
-    if (this.state.operator == "/") {
+    if (this.state.operator === "/") {
       let num = splittedNumber.reduce((a, b) => a / b);
       this.setState({ lowerdisplay: num });
     }
-    if (this.state.operator == "%") {
+    if (this.state.operator === "%") {
       let num = splittedNumber.reduce((a, b) => a % b);
       this.setState({ lowerdisplay: num });
     }
@@ -82,76 +89,91 @@ class Bodycomponent extends Component {
    */
   add = (event) => {
     let value = event.target.value;
-    if (value == "=") {
-      // this.props.count(this.setState) 
+    if (value === "=") {
+      // this.props.count(this.setState)
       let splittedValue = this.state.upperdisplay.split(this.state.operator);
       const splittedNumber = splittedValue.map(Number);
       this.lowerDisplay(splittedNumber);
       let array = [...this.state.history];
       array.push(this.state.upperdisplay);
 
-
       this.setState({ history: array });
-      setTimeout(() =>{
-        this.props.getAllStates(this.state) 
-      },1000)
-      
+      setTimeout(() => {
+        this.props.getAllStates(this.state);
+      }, 1000);
     }
-    if (value == "+") {
+    if (value === "+") {
+      if(this.state.upperdisplay.includes(value)){
+        return false 
+      }
+      this.setState({
+        upperdisplay: this.state.upperdisplay + value,
+        operator: value,
+      });
+   
+    }
+    if (value === "-") {
+      if(this.state.upperdisplay.includes(value)){
+        return false 
+      }
       this.setState({
         upperdisplay: this.state.upperdisplay + value,
         operator: value,
       });
     }
-    if (value == "-") {
+    if (value === "*") {
+      if(this.state.upperdisplay.includes(value)){
+        return false 
+      }
+      this.setState({
+        
+        upperdisplay: this.state.upperdisplay + value,
+        operator: value
+      });
+    }
+    if (value === "%") {
+      if(this.state.upperdisplay.includes(value)){
+        return false 
+      }
       this.setState({
         upperdisplay: this.state.upperdisplay + value,
         operator: value,
       });
     }
-    if (value == "*") {
+    if (value === "/") {
+      if(this.state.upperdisplay.includes(value)){
+        return false 
+      }
       this.setState({
         upperdisplay: this.state.upperdisplay + value,
         operator: value,
       });
-    }
-    if (value == "%") {
-      this.setState({
-        upperdisplay: this.state.upperdisplay + value,
-        operator: value,
-      });
-    }
-    if (value == "/") {
-      this.setState({
-        upperdisplay: this.state.upperdisplay + value,
-        operator: value,
-      });
-    } else if (value == "c") {
+    } else if (value === "c") {
       this.clear();
-    } else if (value == "del") {
+    } else if (value === "del") {
       this.backspace();
     } else if (
-      value == "1" ||
-      value == "2" ||
-      value == "3" ||
-      value == "4" ||
-      value == "5" ||
-      value == "6" ||
-      value == "7" ||
-      value == "8" ||
-      value == "9" ||
-      value == "+" ||
-      value == "-" ||
-      value == "*" ||
-      value == "%" ||
-      value == "/" ||
-      value == "0"  ||
-      value == "."
+      value === "1" ||
+      value === "2" ||
+      value === "3" ||
+      value === "4" ||
+      value === "5" ||
+      value === "6" ||
+      value === "7" ||
+      value === "8" ||
+      value === "9" ||
+      value === "+" ||
+      value === "-" ||
+      value === "*" ||
+      value === "%" ||
+      value === "/" ||
+      value === "0" ||
+      value === "."
     ) {
       this.setState({ upperdisplay: this.state.upperdisplay + value });
-      
-      if(this.state.upperdisplay.length>10){
-        this.setState({exceeded:"Limit exceeded"})
+
+      if (this.state.upperdisplay.length > 10) {
+        this.setState({ exceeded: "Limit exceeded" });
       }
     }
   };
@@ -189,11 +211,16 @@ class Bodycomponent extends Component {
           <div className="row  p-2">
             {arr.map((value) => {
               return (
-                <div className="col-3 shadow bg-grey" style = {{backgroundSize:"cover"}}>
+                <div
+                  className="col-3 shadow bg-grey"
+                  style={{ backgroundSize: "cover" }}
+                >
                   <Button
                     className="btn btn-primary col-12 mt-2"
                     value={value}
-                    handleClick={(event) => this.state.exceeded?"": this.add(event)}
+                    handleClick={(event) =>
+                      this.state.exceeded ? "" : this.add(event)
+                    }
                     btnText={value}
                   />
                 </div>
@@ -206,4 +233,4 @@ class Bodycomponent extends Component {
     );
   }
 }
-export default connect (mapStateToProps,mapDispatchToProps()) (Bodycomponent)
+export default connect(mapStateToProps, mapDispatchToProps())(Bodycomponent);
